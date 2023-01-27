@@ -276,11 +276,11 @@ function get_key(){
         stty echo
         stty $SAVEDSTTY
     }
-    cp -f ca.cert.pem /usr/local/etc/ipsec.d/cacerts/
-    cp -f server.cert.pem /usr/local/etc/ipsec.d/certs/
-    cp -f server.pem /usr/local/etc/ipsec.d/private/
-    cp -f client.cert.pem /usr/local/etc/ipsec.d/certs/
-    cp -f client.pem  /usr/local/etc/ipsec.d/private/
+    cp -f ca.cert.pem /etc/ipsec.d/cacerts/
+    cp -f server.cert.pem /etc/ipsec.d/certs/
+    cp -f server.pem /etc/ipsec.d/private/
+    cp -f client.cert.pem /etc/ipsec.d/certs/
+    cp -f client.pem  /etc/ipsec.d/private/
     echo "Cert copy completed"
 }
 
@@ -342,7 +342,7 @@ function create_cert(){
 
 # configure the ipsec.conf
 function configure_ipsec(){
- cat > /usr/local/etc/ipsec.conf<<-EOF
+ cat > /etc/ipsec.conf<<-EOF
 config setup
     uniqueids=never 
 
@@ -422,7 +422,7 @@ EOF
 
 # configure the strongswan.conf
 function configure_strongswan(){
- cat > /usr/local/etc/strongswan.conf<<-EOF
+ cat > /etc/strongswan.conf<<-EOF
  charon {
         load_modular = yes
         duplicheck {
@@ -443,7 +443,7 @@ EOF
 
 # configure the ipsec.secrets
 function configure_secrets(){
-    cat > /usr/local/etc/ipsec.secrets<<-EOF
+    cat > /etc/ipsec.secrets<<-EOF
 : RSA server.pem
 : PSK "myPSKkey"
 : XAUTH "myXAUTHPass"
@@ -574,7 +574,7 @@ function success_info(){
     echo -e "# UserName:$(__green " myUserName")"
     echo -e "# PassWord:$(__green " myUserPass")"
     echo -e "# PSK:$(__green " myPSKkey")"
-    echo -e "# you should change default username and password in$(__green " /usr/local/etc/ipsec.secrets")"
+    echo -e "# you should change default username and password in$(__green " /etc/ipsec.secrets")"
     echo -e "# you cert:$(__green " ${cur_dir}/my_key/ca.cert.pem ")"
     if [ "$have_cert" = "1" ]; then
     echo -e "# you don't need to install cert if it's be trusted."
