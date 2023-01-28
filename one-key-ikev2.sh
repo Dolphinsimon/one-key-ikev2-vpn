@@ -9,7 +9,7 @@ export PATH
 #===============================================================================================
 
 clear
-VER=1.2.0
+VER=1.3.0
 echo "#############################################################"
 echo "# Install IKEV2 VPN for CentOS6.x/7 (32bit/64bit) or Ubuntu or Debian7/8.*"
 echo "# Intro: https://quericy.me/blog/699"
@@ -214,7 +214,7 @@ function pre_install(){
 
 # Download strongswan
 function download_files(){
-    strongswan_version='strongswan-5.9.0'
+    strongswan_version='strongswan-5.9.9'
     strongswan_file="$strongswan_version.tar.gz"
     if [ -f $strongswan_file ];then
         echo -e "$strongswan_file [$(__green "found")]"
